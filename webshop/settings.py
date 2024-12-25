@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_bootstrap5',
     'shop.apps.ShopConfig',
-    
+    'django_extensions',
     # 'catalog.apps.CatalogConfig',
     'users.apps.UsersConfig',
     # 'tovars.apps.TovarsConfig',

@@ -15,3 +15,6 @@ trans:
 
 transsave:
 	django-admin compilemessages
+
+shell:
+	python manage.py shell_plus --print-sql

@@ -10,6 +10,9 @@ class IndexView(TemplateView):
     template_name = 'shop/index.html'
 
 
+class AboutView(TemplateView):
+    template_name = 'shop/about.html'
+
 class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = 'form.html'
     next_page = reverse_lazy('index')
