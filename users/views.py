@@ -1,12 +1,10 @@
-from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
-from django.contrib import messages
 from . import models
 from . import forms
 from django.views.generic import (
-    CreateView, UpdateView
+    CreateView, UpdateView, DetailView
 )
 from . import mixins
 
@@ -29,10 +27,13 @@ class UserUpdateView(mixins.CheckSelfUserMixin,
     model = models.User
     form_class = forms.UpdateUserForm
     template_name = 'form.html'
-    success_url = reverse_lazy('users_index')
+    success_url = reverse_lazy('index')
     success_message = _('User successfully changed')
     extra_context = {
         'head': _('Change user'),
         'button_text': _('Change'),
     }
 
+class UsersDetailView(mixins.CheckSelfUserMixin, DetailView):
+    template_name = 'users/users_detail.html'
+    model = models.User

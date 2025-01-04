@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load  django_bootstrap5  %} 
+{% load i18n %}
+{% block content %}
+<h1 class="text-center mb-4">{{shop.name}}</h1>
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    {% for tovar in tovars %}
+    <div class="col mt-3 mb-3">
+        
+        <div class="card mb-4 rounded-3 shadow-sm h-100">
+            <div class="card-header py-3 bg-primary text-white">
+                <h4 class="my-0 fw-normal">{{ tovar.name }}</h4>
+                <a href="{% url 'tovars_detail' tovar.pk %}"></a>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ tovar.description|truncatewords:30 }}</p>
+                <p class="card-title text-success">Price: ${{ tovar.price }}</p>
+                <p class="card-text">In stock: <strong>{{ tovar.stock }}</strong> pcs.</p>
+                <a href="#" class="w-100 btn btn-lg btn-outline-primary mt-3">
+                    {% trans "Add to cart" %}
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+  <p><a href="{% url 'index' %}">Back to catalog</a></p>
+{% endblock %}

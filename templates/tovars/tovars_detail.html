@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load  django_bootstrap5  %} 
+{% load i18n %}
+{% block content %}
+<h1 class="text-center mb-4">{% trans "Task view" %}</h1>
+        
+{% if tovar %}
+    <div class="card">
+        <div class="card-header bg-secondary text-white">
+            <h2>{{ tovars.name }}</h2>
+        </div>
+        <div class="card-body bg-light">
+            <p>{{ tovars.description }}</p>
+            <hr>
+            <div class="container">
+                <div class="row p-1">
+                    <div class="col">{{ tovars.image }}</div>
+
+                </div>
+                <div class="row p-1">
+                    <div class="col">{% trans 'Stock' %}</div>
+                    <div class="col">{{ tovars.stock}}</div>
+                </div>
+                <div class="row p-1">
+                    <div class="col">{% trans 'Price' %}</div>
+                    <div class="col">{{ task.price }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

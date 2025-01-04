@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load  django_bootstrap5  %} 
+{% load i18n %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">My profile</h2>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card mb-4 rounded-3 shadow-sm h-100">
+                <div class="card-header py-3 bg-primary text-white">
+                    <h4 class="my-0 fw-normal">Information about user</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Name:</strong> {{ user.get_full_name }}</p>
+                    <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+                    <p class="card-text"><strong>Phone:</strong> {{ user.phone }}</p>
+                    <p class="card-text"><strong>Address:</strong> {{ user.address }}</p>
+                    <a href="{% url 'users_update' user.pk %}" class="w-100 btn btn-lg btn-outline-primary mt-3">Edit data</a>
+                    <a href="#" class="w-100 btn btn-lg btn-outline-secondary mt-3">My orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

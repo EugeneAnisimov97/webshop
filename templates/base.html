@@ -20,14 +20,18 @@
         
                 <nav class="ml-auto">
                     <ul class="nav nav-pills">
+                        
                         <li class="nav-item">
-                            <a href="{% url 'about' %}" class="nav-link px-2 text-white">{% trans "About me" %}</a>
+                            <a href="{% url 'index' %}" class="nav-link px-2 text-white">{% trans "Catalog" %}</a>
                         </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a href="#" class="nav-link px-2 text-white">{% trans "Profile" %}</a>
+                                <a href="{% url "users_detail" user.pk %}" class="nav-link px-2 text-white">{% trans "Profile" %}</a>
                             </li>
                         {% endif %}
+                        <li class="nav-item">
+                            <a href="{% url 'about' %}" class="nav-link px-2 text-white">{% trans "About me" %}</a>
+                        </li>
                     </ul>
                 </nav>
         

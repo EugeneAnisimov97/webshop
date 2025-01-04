@@ -3,12 +3,22 @@
 {% load i18n %}
 {% block content %}
     <h1 class="my-4"></h1>
-    <div class="card">
-        <div class="card-body p-5 bg-light">
-            <div class="display-4">{% trans "Hello!" %}</div>
-            <p class="lead">{% trans "You've come to the store" %}</p>
-            <hr>
-            <a class="btn btn-primary btn-lg" href="https://t.me/Eugene_Anisimov">{% trans "My TG" %}</a>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        {% for category in shops %}
+        <div class="col mt-3 mb-3">
+            <div class="card mb-4 rounded-3 shadow-sm h-100">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">{{ category.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-title">{{ category.content }}</p>
+                    <a href="{% url 'tovars_list' category.id %}" class="w-100 btn btn-lg btn-outline-primary">
+                        Go
+                    </a>
+                </div>
+            </div>
         </div>
+        {% endfor %}
+        
     </div>
 {% endblock %}

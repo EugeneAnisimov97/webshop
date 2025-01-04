@@ -7,7 +7,8 @@ class CreateUserForm(UserCreationForm):
         model = models.User
         fields = [
             'first_name', 'last_name', 'email',
-            'username', 'password1', 'password2'
+            'username', 'phone', 'address',
+            'password1', 'password2'
         ]
 
 

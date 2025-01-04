@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'shop.apps.ShopConfig',
     'django_extensions',
-    # 'catalog.apps.CatalogConfig',
+    'django_filters',
     'users.apps.UsersConfig',
-    # 'tovars.apps.TovarsConfig',
+    'tovars.apps.TovarsConfig',
 ]
 
 MIDDLEWARE = [
