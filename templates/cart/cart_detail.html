@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Корзина</h2>
+    
+    {% if cart_items %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-light text-center">
+                    <tr>
+                        <th>Товар</th>
+                        <th>Количество</th>
+                        <th>Цена</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>
+                            <img src="{{ item.tovar.image.url }}" alt="{{ item.tovar.name }}" class="img-fluid" style="max-height: 50px; width: auto; object-fit: cover;">
+                            <a href="{% url 'tovars_detail' item.tovar.pk %}" class="fw-bold">{{ item.tovar.name }}</a>
+                        </td>
+                        <td class="text-center align-middle">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <a href="{% url 'cart_add_quantity' item.tovar.id %}" class="btn btn-sm btn-outline-success me-2">+</a>
+                                <span class="fw-bold">{{ item.quantity }}</span>
+                                <a href="{% url 'cart_reduce_quantity' item.tovar.id %}" class="btn btn-sm btn-outline-danger ms-2">-</a>
+                            </div>
+                        </td>
+                        <td class="text-center align-middle">{{ item.tovar.price|floatformat:2 }} ₽</td>
+                        <td class="text-center align-middle">
+                            <a href="{% url 'cart_remove' item.tovar.id %}" class="btn btn-sm btn-outline-danger">Удалить</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="table-info">
+                        <td colspan="2" class="text-end fw-bold">Итого:</td>
+                        <td colspan="2" class="fw-bold text-center">{{ total_cart_sum|floatformat:2 }} ₽</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center" role="alert">
+            Корзина пуста.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

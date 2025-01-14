@@ -1,5 +1,5 @@
 from django.db import models
-from shop.models import Shop
+from shop.models import Category
 
 # Create your models here.
 class Tovars(models.Model):
@@ -8,7 +8,7 @@ class Tovars(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()
     image = models.ImageField(upload_to='tovars/', blank=True, null=True)
-    category = models.ForeignKey(Shop, on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
     
     def __str__(self):
         return self.name
