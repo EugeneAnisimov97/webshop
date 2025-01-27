@@ -3,9 +3,11 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.views.generic import TemplateView, DetailView, ListView
+from django.views.generic import TemplateView, DetailView, CreateView
 from . import models
 from django_filters.views import FilterView
+from .models import Category
+from shop.forms import CategoryForm
 
 
 class IndexView(TemplateView):
@@ -41,3 +43,14 @@ class UserLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
         messages.info(request, _('You are logged out'))
         return super().dispatch(request, *args, **kwargs)
+
+class CategoryCreateView(SuccessMessageMixin, CreateView):
+    template_name = 'form.html'
+    model = Category
+    form_class = CategoryForm
+    success_url = reverse_lazy('index')
+    success_message = _('Category successfully created')
+    extra_context = {
+        'head': _('Create Category'),
+        'button_text': _('Create'),
+    }

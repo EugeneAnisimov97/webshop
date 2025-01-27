@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <style>
+        .order-form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .product-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .product-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+        .price, .total {
+            font-weight: bold;
+        }
+        .total-amount {
+            color: #d9534f; /* Красный цвет для общей суммы */
+        }
+        .btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<h1>Создание заказа</h1>
+<form method="post" class="order-form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="address">Адрес:</label>
+        <input type="text" name="address" id="address" value="{{ address|default:'' }}" required class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="phone">Телефон:</label>
+        <input type="text" name="phone" id="phone" value="{{ phone|default:'' }}" required class="form-control">
+    </div>
+
+    <h2>Ваши товары:</h2>
+    <ul class="product-list">
+        {% if tovars %}
+            {% for tovar, quantity in tovars %}
+                <li class="product-item">
+                    <img src="{{ tovar.image.url }}" alt="{{ tovar.name }}" class="img-fluid" style="max-height: 50px; width: auto; object-fit: cover;">
+                    <a href="{% url 'tovars_detail' tovar.pk %}" class="fw-bold">{{ tovar.name }}</a> - Количество: {{ quantity }},
+                    Цена за единицу: <span class="price">{{ tovar.price }} руб.</span>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>Корзина пуста.</li>
+        {% endif %}
+    </ul>
+
+    <h3>Общая сумма: <span class="total-amount">{{ total_amount|floatformat:2 }} руб.</span></h3>
+
+    <button type="submit" class="btn">Создать заказ</button>
+</form>
+{% endblock %}

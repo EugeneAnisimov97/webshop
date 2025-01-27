@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load multiply %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Детали заказа #{{ order.id }}</h1>
+    <div class="card mb-4">
+        <div class="card-body">
+            <p><strong>Статус:</strong> {{ order.get_status_display }}</p>
+            <p><strong>Создан:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
+            <p><strong>Адрес:</strong> {{ order.address }}</p>
+            <p><strong>Телефон:</strong> {{ order.phone }}</p>
+            <p><strong>Общая сумма:</strong> {{ order.total_amount }} руб.</p>
+        </div>
+    </div>
+
+    <h2 class="mt-4">Товары в заказе:</h2>
+    <ul class="list-group">
+        {% for item in items %}
+            <li class="list-group-item">
+                {{ item.quantity }} x {{ item.tovar.name }} - {{ item.price }} руб. 
+                (Итого: {{ item.price|multiply:item.quantity }} руб.)
+            </li>
+        {% empty %}
+            <li class="list-group-item">Нет товаров в этом заказе.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'orders_list' %}" class="btn btn-primary mt-4">Вернуться к списку заказов</a>
+</div>
+{% endblock %}

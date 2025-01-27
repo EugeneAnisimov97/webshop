@@ -41,10 +41,10 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'shop.apps.ShopConfig',
     'django_extensions',
-    'django_filters',
     'users.apps.UsersConfig',
     'tovars.apps.TovarsConfig',
-    'cart.apps.CartConfig'
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
         },
     },
 ]

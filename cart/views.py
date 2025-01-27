@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cart, CartItem
 from tovars.models import Tovars
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from webshop.mixins import get_cart
 
-
-def get_cart(request):
-    return request.session.get('cart', {})
 
 def add_to_cart(request, tovar_id):
     cart = get_cart(request)
@@ -38,8 +37,13 @@ def cart_detail(request):
     return render(request, 'cart/cart_detail.html', context)
 
 def cart_add_quantity(request, tovar_id):
+    tovar = get_object_or_404(Tovars, id=tovar_id)
     cart = get_cart(request)
-    cart[str(tovar_id)] += 1
+    if str(tovar_id) in cart:
+        if cart[str(tovar_id)] < tovar.stock:  # Сравниваем с количеством на складе
+            cart[str(tovar_id)] += 1
+        else:
+            messages.warning(request, 'Недостаточно товара на складе.')
     request.session['cart'] = cart
     return redirect('cart_detail')
 

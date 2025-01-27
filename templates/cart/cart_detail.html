@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <div class="container mt-4">
     <h2 class="mb-4 text-center">Корзина</h2>
@@ -42,6 +41,11 @@
                 </tbody>
             </table>
         </div>
+        
+        <div class="text-center mt-4">
+            <a href="{% url 'orders_create' %}" class="btn btn-primary">Создать заказ</a>
+        </div>
+        
     {% else %}
         <div class="alert alert-warning text-center" role="alert">
             Корзина пуста.

@@ -2,6 +2,9 @@
 {% load  django_bootstrap5  %} 
 {% load i18n %}
 {% block content %}
+{% if user.is_staff %}
+<a class="btn btn-primary mb-3" href="{% url 'category_create' %}">{% trans "Создать каталог" %}</a>
+{% endif %}
     <h1 class="my-4"></h1>
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
         {% for category in shops %}

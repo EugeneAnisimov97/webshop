@@ -13,8 +13,8 @@
                 <div class="card-body">
                     <p class="card-text"><strong>Name:</strong> {{ user.get_full_name }}</p>
                     <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
-                    <p class="card-text"><strong>Phone:</strong> {{ user.phone }}</p>
-                    <p class="card-text"><strong>Address:</strong> {{ user.address }}</p>
+                    <p class="card-text"><strong>Phone:</strong> {{ user.phone|default:"" }}</p>
+                    <p class="card-text"><strong>Address:</strong> {{ user.address|default:"" }}</p>
                     <a href="{% url 'users_update' user.pk %}" class="w-100 btn btn-lg btn-outline-primary mt-3">Edit data</a>
                     <a href="#" class="w-100 btn btn-lg btn-outline-secondary mt-3">My orders</a>
                 </div>

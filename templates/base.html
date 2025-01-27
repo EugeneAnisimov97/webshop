@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load django_bootstrap5 %}
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,6 +28,9 @@
                         {% if user.is_authenticated %}
                             <li class="nav-item">
                                 <a href="{% url "users_detail" user.pk %}" class="nav-link px-2 text-white">{% trans "Profile" %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url "orders_list" %}" class="nav-link px-2 text-white">{% trans "Orders" %}</a>
                             </li>
                         {% endif %}
                         <li class="nav-item">
