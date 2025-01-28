@@ -82,7 +82,7 @@ class CreateOrderView(CheckLoginMixin, View):
         request.session['cart'] = {}
 
 
-class OrderDetailView(DetailView):
+class OrderDetailView(CheckLoginMixin, DetailView):
     template_name = 'orders/order_detail.html'
     model = Orders
     context_object_name = 'order'
@@ -93,7 +93,9 @@ class OrderDetailView(DetailView):
         return context
 
 
-class OrderListView(ListView):
+class OrderListView(CheckLoginMixin, ListView):
     template_name = 'orders/order_list.html'
     model = Orders
     context_object_name = 'orders'
+    def get_queryset(self):
+        return Orders.objects.filter(user=self.request.user)

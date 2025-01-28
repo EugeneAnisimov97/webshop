@@ -1,8 +1,10 @@
 from . import models
 from django.contrib.auth.forms import UserCreationForm
+from captcha.fields import CaptchaField
 
 
 class CreateUserForm(UserCreationForm):
+    captcha = CaptchaField()
     class Meta:
         model = models.User
         fields = [
@@ -10,7 +12,7 @@ class CreateUserForm(UserCreationForm):
             'username', 'phone', 'address',
             'password1', 'password2'
         ]
-
+    
 
 class UpdateUserForm(CreateUserForm):
     def clean_username(self):

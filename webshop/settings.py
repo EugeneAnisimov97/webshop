@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'tovars.apps.TovarsConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'captcha'
 ]
 
 MIDDLEWARE = [
